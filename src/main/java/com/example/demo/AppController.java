@@ -41,4 +41,9 @@ public class AppController {
         model.addAttribute("listUsers", listUsers);
         return "users";
     }
+
+    @GetMapping("/sa")
+    public String sa() {
+        return "saaaaa";
+    }
 }
