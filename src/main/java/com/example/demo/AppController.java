@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -40,5 +40,29 @@ public class AppController {
         List<User> listUsers = repo.findAll();
         model.addAttribute("listUsers", listUsers);
         return "users";
+    }
+
+    @RequestMapping(value = "/save", method = RequestMethod.POST)
+    public String saveTodo(@ModelAttribute("user") User user) {
+
+        repo.save(user);
+
+        return "redirect:/";
+    }
+
+    @RequestMapping("/edit/{id}")
+    public ModelAndView showEditTodoForm(@PathVariable(name = "id") Long id) {
+        ModelAndView mav = new ModelAndView("edit_todo");
+
+        User user = repo.findById(id).get();
+        mav.addObject("user", user);
+
+        return mav;
+    }
+
+    @RequestMapping("/delete/{id}")
+    public String deleteProduct(@PathVariable(name = "id") Long id) {
+        repo.deleteById(id);
+        return "redirect:/";
     }
 }
