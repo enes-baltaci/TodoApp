@@ -25,7 +25,7 @@ public class UserRepositoryTests {
         user.setPassword("enes123");
         user.setFirstName("Enes");
         user.setLastName("Baltaci");
-        user.setTodo("Yarin eve gidecegiz ve ordan sonra gidip uyuyacagiz ama ne yapsak bilmiyoruz ne etsek bilmiyoruz hepimizin kafasi karisik yahu");
+        user.setTodo("Go to market and buy some bananas, apples, juice box and a bread.");
 
         User savedUser = repo.save(user);
 
